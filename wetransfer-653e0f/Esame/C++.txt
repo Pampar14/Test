@@ -1,0 +1,91 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include "creaNumeriCasuali.h"
+#include <time.h>
+------------ STAMPA NUMERI DISPARI CONSOLE--------------
+
+using namespace std;
+//C:\Users\Mario\Desktop\numeriDispari.txt
+int main()
+{
+    srand(time(NULL));
+    int ripetizioni = 100;
+    ofstream file ("C:\\Users\\Mario\\Desktop\\numeri.txt");
+    vector<int> numeriDispari;
+    for (int i =0; i<= ripetizioni; i++){
+        int numero = numeroCasuale();
+        file << numero << " ";
+        if ((numero % 2) == 1 )
+        numeriDispari.push_back(numero);
+    }
+    for (int it=0; it < numeriDispari.size(); it++)
+        cout << numeriDispari[it] << " ";
+    file.close();
+
+#ifndef CREANUMERICASUALI_H_INCLUDED
+#define CREANUMERICASUALI_H_INCLUDED
+
+int numeroCasuale(){
+
+
+   int numero = rand()%100 + 1;
+
+   return numero;
+}
+
+#endif // CREANUMERICASUALI_H_INCLUDED
+
+
+-------------CALCOLO POPOLAZIONE MEDIA E SCRITTURA SU FILE-----------------------
+#include <iostream>
+#include <map>
+#include <time.h>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    double popolazione =0;
+    map<string, int> regioni = {{"Lombardia", 1000},{"Lazio", 100}, {"Liguria", 2}};
+
+      for(auto it=regioni.begin(); it!=regioni.end(); it++){
+       popolazione += it->second;
+   }
+    time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+    ofstream file ("C:\\Users\\Mario\\Desktop\\media.txt");
+    file << "Popolazione media al giorno: "<< asctime (timeinfo) << " e' di: " <<popolazione / regioni.size();
+
+    return 0;
+}
+
+
+---------------NUMERI NON RIPETUTI------------------
+
+#include <iostream>
+#include <set>
+#include <fstream>
+#include <time.h>
+using namespace std;
+
+int main()
+{
+    srand(time(NULL));
+   set<int> numeriCasuali;
+   int maxValue = INT_MAX;
+   ofstream file ("C:\\Users\\Mario\\Desktop\\numeriCasuali.txt");
+   int numero = 0;
+   while(numeriCasuali.size()<=100){
+        numero=rand()% maxValue +1;
+        numeriCasuali.insert(numero);
+        cout <<numero << endl;
+   }
+   for (auto it = numeriCasuali.begin() ; it != numeriCasuali.end(); it ++)
+    file << *it << "\n";
+}
+
